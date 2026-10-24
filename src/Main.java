@@ -35,5 +35,19 @@ public class Main {
         
         System.out.println("\nExplosão da fórmula para 10 canetas:");
         arvore.explodirFormula(raiz, 10, 0);
+        
+        System.out.println("\nCusto antes da alteração: R$ "
+                + String.format("%.2f", arvore.calcularCustoComponentes(raiz)));
+
+        boolean atualizado = arvore.atualizarPreco(raiz, "Pigmento", 0.60);
+
+        if (atualizado) {
+            System.out.println("Preço do Pigmento atualizado para R$ 0,60.");
+        } else {
+            System.out.println("Componente não encontrado.");
+        }
+
+        System.out.println("Custo após a alteração: R$ "
+                + String.format("%.2f", arvore.calcularCustoComponentes(raiz)));
     }
 }

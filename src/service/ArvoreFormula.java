@@ -182,5 +182,30 @@ public class ArvoreFormula {
             explodirFormula(filho, quantidadeNecessaria, nivel + 1);
         }
     }
+    
+    public boolean atualizarPreco(TreeNode no, String nomeComponente, double novoPreco) {
+        if (no == null) {
+            return false;
+        }
+
+        if (novoPreco < 0) {
+            throw new IllegalArgumentException(
+                "O preço não pode ser negativo."
+            );
+        }
+
+        if (no.getItem().getNome().equalsIgnoreCase(nomeComponente)) {
+            no.getItem().setPrecoUnitario(novoPreco);
+            return true;
+        }
+
+        for (TreeNode filho : no.getFilhos()) {
+            if (atualizarPreco(filho, nomeComponente, novoPreco)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }
