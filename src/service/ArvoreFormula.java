@@ -1,0 +1,139 @@
+package service;
+
+import model.ItemFormula;
+import model.TreeNode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class ArvoreFormula {
+    private TreeNode raiz;
+
+    public TreeNode construir(List<ItemFormula> itens) {
+        if (itens == null || itens.isEmpty()) {
+            throw new IllegalArgumentException("A lista de itens não pode estar vazia.");
+        }
+
+        Map<String, TreeNode> nos = new HashMap<>();
+        Map<String, Integer> ocorrencias = new HashMap<>();
+        Set<ItemFormula> itensConhecidos = new HashSet<>();
+
+        for (ItemFormula item : itens) {
+            if (item == null || item.getNome() == null || item.getNome().isBlank()) {
+                throw new IllegalArgumentException("Existe um item sem nome válido.");
+            }
+
+            if (item.getQuantidade() <= 0 || item.getPrecoUnitario() < 0) {
+                throw new IllegalArgumentException("Quantidade ou preço inválido.");
+            }
+
+            if (!itensConhecidos.add(item)) {
+                throw new IllegalArgumentException("O mesmo objeto foi informado mais de uma vez.");
+            }
+
+            String chave = item.getNome();
+            int numero = ocorrencias.getOrDefault(chave, 0) + 1;
+            ocorrencias.put(chave, numero);
+
+            if (numero > 1) {
+                chave = item.getNome() + "#" + numero;
+            }
+
+            nos.put(chave, new TreeNode(item));
+        }
+
+        Map<ItemFormula, TreeNode> nosPorItem = new HashMap<>();
+        for (TreeNode no : nos.values()) {
+            nosPorItem.put(no.getItem(), no);
+        }
+
+        List<TreeNode> raizes = new ArrayList<>();
+
+        for (TreeNode no : nos.values()) {
+            ItemFormula item = no.getItem();
+
+            if (item.getNomePai() == null) {
+                raizes.add(no);
+                continue;
+            }
+
+            List<TreeNode> paisPossiveis = new ArrayList<>();
+
+            for (TreeNode candidato : nos.values()) {
+                if (candidato.getItem().getNome().equals(item.getNomePai())
+                        && candidato != no) {
+                    paisPossiveis.add(candidato);
+                }
+            }
+
+            if (paisPossiveis.isEmpty()) {
+                throw new IllegalArgumentException(
+                    "Pai não encontrado para o item: " + item.getNome()
+                );
+            }
+
+            if (paisPossiveis.size() > 1) {
+                throw new IllegalArgumentException(
+                    "Pai ambíguo para " + item.getNome()
+                    + ". É necessário identificar unicamente o pai."
+                );
+            }
+
+            paisPossiveis.get(0).adicionarFilho(no);
+        }
+
+        if (raizes.size() != 1) {
+            throw new IllegalArgumentException(
+                "A fórmula deve possuir exatamente uma raiz."
+            );
+        }
+
+        raiz = raizes.get(0);
+
+        Set<TreeNode> visitados = new HashSet<>();
+        validarArvore(raiz, visitados);
+
+        if (visitados.size() != itens.size()) {
+            throw new IllegalArgumentException(
+                "Existem itens desconectados ou ciclos na fórmula."
+            );
+        }
+
+        return raiz;
+    }
+
+    private void validarArvore(TreeNode no, Set<TreeNode> visitados) {
+        if (!visitados.add(no)) {
+            throw new IllegalArgumentException("Foi detectado um ciclo na fórmula.");
+        }
+
+        for (TreeNode filho : no.getFilhos()) {
+            validarArvore(filho, visitados);
+        }
+    }
+
+    public TreeNode getRaiz() {
+        return raiz;
+    }
+
+    public void imprimir(TreeNode no, int nivel) {
+        if (no == null) {
+            return;
+        }
+
+        System.out.println(
+            "  ".repeat(nivel)
+            + no.getItem().getNome()
+            + " - R$ "
+            + String.format("%.2f", no.getItem().getPrecoUnitario())
+        );
+
+        for (TreeNode filho : no.getFilhos()) {
+            imprimir(filho, nivel + 1);
+        }
+    }
+}
