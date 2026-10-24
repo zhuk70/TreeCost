@@ -136,4 +136,21 @@ public class ArvoreFormula {
             imprimir(filho, nivel + 1);
         }
     }
+    
+    public double calcularCustoComponentes(TreeNode no) {
+        if (no == null) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+
+        for (TreeNode filho : no.getFilhos()) {
+            total += filho.getItem().getQuantidade()
+                    * filho.getItem().getPrecoUnitario();
+
+            total += calcularCustoComponentes(filho);
+        }
+
+        return total;
+    }
 }

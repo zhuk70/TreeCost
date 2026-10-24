@@ -26,5 +26,11 @@ public class Main {
 
         System.out.println("Árvore da fórmula da caneta:");
         arvore.imprimir(raiz, 0);
+        double custo = arvore.calcularCustoComponentes(raiz);
+
+        System.out.printf(
+            "%nCusto total de aquisição dos componentes: R$ %.2f%n",
+            custo
+            );
     }
 }
