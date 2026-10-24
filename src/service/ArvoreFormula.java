@@ -142,15 +142,45 @@ public class ArvoreFormula {
             return 0.0;
         }
 
+        if (no.ehFolha()) {
+            return no.getItem().getQuantidade()
+                    * no.getItem().getPrecoUnitario();
+        }
+
         double total = 0.0;
 
         for (TreeNode filho : no.getFilhos()) {
-            total += filho.getItem().getQuantidade()
-                    * filho.getItem().getPrecoUnitario();
-
-            total += calcularCustoComponentes(filho);
+         total += filho.getItem().getQuantidade()
+                  * calcularCustoComponentes(filho);
         }
 
         return total;
     }
+    
+    public void explodirFormula(TreeNode no, int quantidadeProduzir, int nivel) {
+        if (no == null) {
+            return;
+        }
+
+        if (quantidadeProduzir <= 0) {
+            throw new IllegalArgumentException(
+                "A quantidade a produzir deve ser maior que zero."
+            );
+        }
+
+        for (TreeNode filho : no.getFilhos()) {
+            int quantidadeNecessaria =
+                    quantidadeProduzir * filho.getItem().getQuantidade();
+
+            System.out.println(
+                "  ".repeat(nivel)
+                + filho.getItem().getNome()
+                + " - Quantidade necessária: "
+                + quantidadeNecessaria
+            );
+
+            explodirFormula(filho, quantidadeNecessaria, nivel + 1);
+        }
+    }
+
 }

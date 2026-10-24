@@ -32,5 +32,8 @@ public class Main {
             "%nCusto total de aquisição dos componentes: R$ %.2f%n",
             custo
             );
+        
+        System.out.println("\nExplosão da fórmula para 10 canetas:");
+        arvore.explodirFormula(raiz, 10, 0);
     }
 }
