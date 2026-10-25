@@ -137,25 +137,26 @@ public class ArvoreFormula {
         }
     }
     
+
     public double calcularCustoComponentes(TreeNode no) {
         if (no == null) {
             return 0.0;
         }
 
         if (no.ehFolha()) {
-            return no.getItem().getQuantidade()
-                    * no.getItem().getPrecoUnitario();
+            return no.getItem().getPrecoUnitario();
         }
 
         double total = 0.0;
 
         for (TreeNode filho : no.getFilhos()) {
-         total += filho.getItem().getQuantidade()
-                  * calcularCustoComponentes(filho);
+            total += filho.getItem().getQuantidade()
+                    * calcularCustoComponentes(filho);
         }
 
         return total;
     }
+
     
     public void explodirFormula(TreeNode no, int quantidadeProduzir, int nivel) {
         if (no == null) {
