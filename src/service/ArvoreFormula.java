@@ -250,8 +250,32 @@ public class ArvoreFormula {
                 return encontrado;
             }
         }
-
         return null;
+    }
+    
+    public boolean removerComponente(String nomePai, String nomeComponente) {
+        if (raiz == null || nomePai == null || nomeComponente == null) {
+            return false;
+        }
+
+        if (raiz.getItem().getNome().equalsIgnoreCase(nomeComponente)) {
+            return false;
+        }
+
+        TreeNode pai = buscarNo(raiz, nomePai);
+
+        if (pai == null) {
+            return false;
+        }
+
+        for (TreeNode filho : pai.getFilhos()) {
+            if (filho.getItem().getNome().equalsIgnoreCase(nomeComponente)) {
+                pai.getFilhos().remove(filho);
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

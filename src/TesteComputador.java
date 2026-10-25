@@ -35,6 +35,15 @@ public class TesteComputador {
         "Computador",
         new ItemFormula("Webcam", "Computador", 1, 150.00)
         );
+        boolean removido = arvore.removerComponente(
+            "Computador",
+            "Webcam"
+        );
+
+        System.out.println("Componente removido: " + removido);
+
+        System.out.println("\nÁrvore após a remoção:");
+        arvore.imprimir(raiz, 0);
 
         System.out.println("Componente adicionado: " + adicionado);
 
