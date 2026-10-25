@@ -27,6 +27,7 @@ public class TelaTreeCost extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel painelCampos = new JPanel(new GridLayout(5, 2, 8, 8));
+        painelCampos.setPreferredSize(new Dimension(750, 300));
         painelCampos.setBorder(
             BorderFactory.createEmptyBorder(12, 12, 12, 12)
         );
@@ -45,9 +46,15 @@ public class TelaTreeCost extends JFrame {
 
         JButton botaoCadastrar = new JButton("Cadastrar componente");
         JButton botaoAtualizar = new JButton("Atualizar árvore");
+        JButton botaoConsultar = new JButton("Consultar componente");
 
-        painelCampos.add(botaoCadastrar);
-        painelCampos.add(botaoAtualizar);
+        JPanel painelBotoes = new JPanel(new GridLayout(1, 3, 5, 0));
+        painelBotoes.add(botaoCadastrar);
+        painelBotoes.add(botaoAtualizar);
+        painelBotoes.add(botaoConsultar);
+
+        painelCampos.add(new JLabel("Ações:"));
+        painelCampos.add(painelBotoes);
 
         areaArvore.setEditable(false);
         areaArvore.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
@@ -57,6 +64,7 @@ public class TelaTreeCost extends JFrame {
 
         botaoCadastrar.addActionListener(e -> cadastrarComponente());
         botaoAtualizar.addActionListener(e -> atualizarArvore());
+        botaoConsultar.addActionListener(e -> consultarComponente());
 
         atualizarArvore();
     }
@@ -146,4 +154,48 @@ public class TelaTreeCost extends JFrame {
             montarTexto(filho, texto, nivel + 1);
         }
     }
+    
+    private void consultarComponente() {
+        String nome = campoNome.getText().trim();
+
+        if (nome.isBlank()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Digite o nome do componente no campo Nome."
+            );
+            return;
+        }
+
+        ItemFormula item = arvore.consultarComponente(
+            arvore.getRaiz(),
+            nome
+        );
+
+        if (item == null) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Componente não encontrado."
+            );
+            return;
+        }
+
+        String mensagem = "Nome: " + item.getNome()
+                + "\nPai: "
+                + (item.getNomePai() == null
+                    ? "Nenhum"
+                    : item.getNomePai())
+                + "\nQuantidade: " + item.getQuantidade()
+                + String.format(
+                    "\nPreço unitário: R$ %.2f",
+                    item.getPrecoUnitario()
+                );
+
+        JOptionPane.showMessageDialog(
+            this,
+            mensagem,
+            "Dados do componente",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
 }
