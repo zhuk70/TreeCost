@@ -31,6 +31,12 @@ public class TesteComputador {
 
         ArvoreFormula arvore = new ArvoreFormula();
         TreeNode raiz = arvore.construir(itensPC);
+        boolean adicionado = arvore.adicionarComponente(
+        "Computador",
+        new ItemFormula("Webcam", "Computador", 1, 150.00)
+        );
+
+        System.out.println("Componente adicionado: " + adicionado);
 
         System.out.println("Árvore da fórmula do computador:");
         arvore.imprimir(raiz, 0);

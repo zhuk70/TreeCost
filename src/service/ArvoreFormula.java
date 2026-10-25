@@ -209,4 +209,49 @@ public class ArvoreFormula {
         return false;
     }
 
+    
+    public boolean adicionarComponente(String nomePai, ItemFormula novoItem) {
+        if (raiz == null || novoItem == null) {
+            return false;
+        }
+
+        if (novoItem.getNome() == null || novoItem.getNome().isBlank()) {
+            return false;
+        }
+
+        if (novoItem.getQuantidade() <= 0
+                || novoItem.getPrecoUnitario() < 0) {
+            return false;
+        }
+
+        TreeNode pai = buscarNo(raiz, nomePai);
+
+        if (pai == null) {
+            return false;
+        }
+
+        pai.adicionarFilho(new TreeNode(novoItem));
+        return true;
+    }
+
+    private TreeNode buscarNo(TreeNode atual, String nome) {
+        if (atual == null || nome == null) {
+            return null;
+        }
+
+        if (atual.getItem().getNome().equalsIgnoreCase(nome)) {
+            return atual;
+        }
+
+        for (TreeNode filho : atual.getFilhos()) {
+            TreeNode encontrado = buscarNo(filho, nome);
+
+            if (encontrado != null) {
+                return encontrado;
+            }
+        }
+
+        return null;
+    }
+
 }
