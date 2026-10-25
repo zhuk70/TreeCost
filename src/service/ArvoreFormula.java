@@ -297,5 +297,25 @@ public class ArvoreFormula {
 
         return null;
     }
+    
+    public void listarComponentes(TreeNode no) {
+        if (no == null) {
+            return;
+        }
+
+        ItemFormula item = no.getItem();
+
+        System.out.printf(
+            "%s | Pai: %s | Quantidade: %d | Preço: R$ %.2f%n",
+            item.getNome(),
+            item.getNomePai() == null ? "Nenhum" : item.getNomePai(),
+            item.getQuantidade(),
+            item.getPrecoUnitario()
+        );
+
+        for (TreeNode filho : no.getFilhos()) {
+            listarComponentes(filho);
+        }
+    }
 
 }

@@ -53,6 +53,8 @@ public class TesteComputador {
         } else {
             System.out.println("Componente não encontrado.");
         }
+        System.out.println("\nLista completa de componentes:");
+        arvore.listarComponentes(raiz);
 
         System.out.println("Componente removido: " + removido);
 
