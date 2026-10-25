@@ -39,6 +39,20 @@ public class TesteComputador {
             "Computador",
             "Webcam"
         );
+        ItemFormula componente = arvore.consultarComponente(
+            raiz,
+            "Memória RAM"
+        );
+
+        if (componente != null) {
+            System.out.println("\nComponente encontrado:");
+            System.out.println("Nome: " + componente.getNome());
+            System.out.println("Quantidade: " + componente.getQuantidade());
+            System.out.printf("Preço unitário: R$ %.2f%n",
+                    componente.getPrecoUnitario());
+        } else {
+            System.out.println("Componente não encontrado.");
+        }
 
         System.out.println("Componente removido: " + removido);
 

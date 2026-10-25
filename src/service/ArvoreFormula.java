@@ -277,5 +277,25 @@ public class ArvoreFormula {
 
         return false;
     }
+    
+    public ItemFormula consultarComponente(TreeNode no, String nome) {
+        if (no == null || nome == null) {
+            return null;
+        }
+
+        if (no.getItem().getNome().equalsIgnoreCase(nome)) {
+            return no.getItem();
+        }
+
+        for (TreeNode filho : no.getFilhos()) {
+            ItemFormula encontrado = consultarComponente(filho, nome);
+
+            if (encontrado != null) {
+                return encontrado;
+            }
+        }
+
+        return null;
+    }
 
 }
