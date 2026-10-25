@@ -37,4 +37,15 @@ public class ItemFormula {
 
         this.precoUnitario = precoUnitario;
     }
+    
+    public void setQuantidade(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException(
+                "A quantidade deve ser maior que zero."
+            );
+        }
+
+        this.quantidade = quantidade;
+    }
+
 }

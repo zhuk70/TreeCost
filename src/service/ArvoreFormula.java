@@ -317,5 +317,37 @@ public class ArvoreFormula {
             listarComponentes(filho);
         }
     }
+    
+    public boolean editarComponente(
+            TreeNode no,
+            String nome,
+            int novaQuantidade,
+            double novoPreco) {
+
+        if (no == null || nome == null || nome.isBlank()) {
+            return false;
+        }
+
+        if (novaQuantidade <= 0 || novoPreco < 0) {
+            return false;
+        }
+
+        ItemFormula item = no.getItem();
+
+        if (item.getNome().equalsIgnoreCase(nome)) {
+            item.setQuantidade(novaQuantidade);
+            item.setPrecoUnitario(novoPreco);
+            return true;
+        }
+
+        for (TreeNode filho : no.getFilhos()) {
+            if (editarComponente(
+                    filho, nome, novaQuantidade, novoPreco)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

@@ -55,6 +55,19 @@ public class TesteComputador {
         }
         System.out.println("\nLista completa de componentes:");
         arvore.listarComponentes(raiz);
+                
+        boolean editado = arvore.editarComponente(
+            raiz,
+            "Memória RAM",
+            3,
+            210.00
+        );
+
+        System.out.println("Componente editado: " + editado);
+
+        System.out.println("\nDados atualizados:");
+        arvore.listarComponentes(raiz);
+
 
         System.out.println("Componente removido: " + removido);
 
