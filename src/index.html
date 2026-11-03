@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>TreeCost - Relatório de Fórmulas</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 40px; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #007bff; margin-bottom: 5px; }
+        .subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
+        .card { background: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        ul { list-style-type: none; padding-left: 20px; }
+        li { margin: 8px 0; position: relative; }
+        li::before { content: "├── "; color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TreeCost - Sistema de Fórmulas (BOM)</h1>
+        <div class="subtitle">Projeto Acadêmico - Estrutura de Árvore Genérica</div>
+
+        <div class="card">
+            <h3>Resumo do Produto (Caneta)</h3>
+            <p><strong>Custo Total (Implosão):</strong> R$ 2,50</p>
+        </div>
+
+        <h3>Explosão de Componentes</h3>
+        <ul>
+            <li><strong>Caneta</strong> (Qtd: 1 | Preço: R$ 2,50)
+                <ul>
+                    <li><strong>Tinta</strong> (Qtd: 1 | Preço: R$ 0,80)
+                        <ul>
+                            <li><strong>Pigmento</strong> (Qtd: 1 | Preço: R$ 0,30)</li>
+                            <li><strong>Solvente</strong> (Qtd: 1 | Preço: R$ 0,50)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Corpo</strong> (Qtd: 1 | Preço: R$ 1,00)
+                        <ul>
+                            <li><strong>Plástico</strong> (Qtd: 1 | Preço: R$ 0,70)</li>
+                            <li><strong>Clip</strong> (Qtd: 1 | Preço: R$ 0,30)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Tampa</strong> (Qtd: 1 | Preço: R$ 0,70)
+                        <ul>
+                            <li><strong>Plástico</strong> (Qtd: 1 | Preço: R$ 0,50)</li>
+                            <li><strong>Vedação</strong> (Qtd: 1 | Preço: R$ 0,20)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

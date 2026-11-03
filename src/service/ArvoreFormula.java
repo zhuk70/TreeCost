@@ -46,11 +46,6 @@ public class ArvoreFormula {
             nos.put(chave, new TreeNode(item));
         }
 
-        Map<ItemFormula, TreeNode> nosPorItem = new HashMap<>();
-        for (TreeNode no : nos.values()) {
-            nosPorItem.put(no.getItem(), no);
-        }
-
         List<TreeNode> raizes = new ArrayList<>();
 
         for (TreeNode no : nos.values()) {
@@ -137,26 +132,22 @@ public class ArvoreFormula {
         }
     }
     
-
     public double calcularCustoComponentes(TreeNode no) {
         if (no == null) {
             return 0.0;
         }
 
-        if (no.ehFolha()) {
-            return no.getItem().getPrecoUnitario();
+        if (no.getFilhos() == null || no.getFilhos().isEmpty()) {
+            return no.getItem().getQuantidade() * no.getItem().getPrecoUnitario();
         }
 
-        double total = 0.0;
-
+        double totalFilhos = 0.0;
         for (TreeNode filho : no.getFilhos()) {
-            total += filho.getItem().getQuantidade()
-                    * calcularCustoComponentes(filho);
+            totalFilhos += calcularCustoComponentes(filho);
         }
 
-        return total;
+        return (no.getItem().getQuantidade() * no.getItem().getPrecoUnitario()) + totalFilhos;
     }
-
     
     public void explodirFormula(TreeNode no, int quantidadeProduzir, int nivel) {
         if (no == null) {
@@ -209,7 +200,6 @@ public class ArvoreFormula {
         return false;
     }
 
-    
     public boolean adicionarComponente(String nomePai, ItemFormula novoItem) {
         if (raiz == null || novoItem == null) {
             return false;
@@ -349,5 +339,4 @@ public class ArvoreFormula {
 
         return false;
     }
-
 }
