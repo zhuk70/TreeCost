@@ -48,7 +48,6 @@ public class MainGUI {
         double novoCustoTotal = arvore.calcularCustoComponentes(arvore.getRaiz());
         System.out.println("Novo Custo Total (Implosão): R$ " + novoCustoTotal);
 
-        // Atualiza o relatório HTML automaticamente com o custo calculado
         HtmlReporter.gerarRelatorio(novoCustoTotal);
 
         SwingUtilities.invokeLater(() -> {
