@@ -1,0 +1,49 @@
+package model;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class HtmlReporter {
+    public static void gerarRelatorio(double custoTotal) {
+        String nomeArquivo = "index.html"; 
+
+        String htmlContent = """
+            <!DOCTYPE html>
+            <html lang="pt">
+            <head>
+                <meta charset="UTF-8">
+                <title>TreeCost - Relatório BOM</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; color: #333; }
+                    .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
+                    h1 { color: #0066cc; }
+                    .highlight { background: #eef6fc; padding: 15px; border-left: 5px solid #0066cc; border-radius: 4px; margin: 20px 0; }
+                </style>
+            </head>
+            <body>
+                <div class="card">
+                    <h1>TreeCost - Sistema de Fórmulas (BOM)</h1>
+                    <p>Projeto Académico - Estrutura de Árvores Genéricas</p>
+                    
+                    <div class="highlight">
+                        <h3>Resumo do Produto (Computador / Base de Dados)</h3>
+                        <p>Custo Total Acumulado (Implosão): <strong>R$ %.2f</strong></p>
+                    </div>
+                    
+                    <p><em>Relatório gerado automaticamente e sincronizado com a base de dados SQLite.</em></p>
+                </div>
+            </body>
+            </html>
+            """.formatted(custoTotal);
+
+        File arquivo = new File(nomeArquivo);
+        try (FileWriter writer = new FileWriter(arquivo)) {
+            writer.write(htmlContent);
+            System.out.println("-> Relatório HTML atualizado com sucesso!");
+            System.out.println("-> Caminho exato do ficheiro: " + arquivo.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
