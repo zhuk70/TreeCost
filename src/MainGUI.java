@@ -1,5 +1,4 @@
 import model.DatabaseManager;
-import model.HtmlReporter;
 import model.ItemFormula;
 import service.ArvoreFormula;
 import view.TelaTreeCost;
@@ -11,8 +10,10 @@ import java.util.List;
 public class MainGUI {
     public static void main(String[] args) {
         
+        
         DatabaseManager.inicializarBanco();
 
+        
         List<ItemFormula> itens = DatabaseManager.carregarItens();
 
         if (itens == null || itens.isEmpty()) {
@@ -47,8 +48,6 @@ public class MainGUI {
 
         double novoCustoTotal = arvore.calcularCustoComponentes(arvore.getRaiz());
         System.out.println("Novo Custo Total (Implosão): R$ " + novoCustoTotal);
-
-        HtmlReporter.gerarRelatorio(novoCustoTotal);
 
         SwingUtilities.invokeLater(() -> {
             new TelaTreeCost(arvore).setVisible(true);

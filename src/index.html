@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>TreeCost - Relatório de Fórmulas</title>
+    <title>TreeCost - Sistema de Fórmulas (BOM)</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 40px; color: #333; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h1 { color: #007bff; margin-bottom: 5px; }
-        .subtitle { color: #666; font-size: 14px; margin-bottom: 25px; }
-        .card { background: #f8f9fa; border-left: 4px solid #007bff; padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; color: #333; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
+        h1 { color: #0066cc; }
+        .highlight { background: #eef6fc; padding: 15px; border-left: 5px solid #0066cc; border-radius: 4px; margin: 20px 0; }
         ul { list-style-type: none; padding-left: 20px; }
-        li { margin: 8px 0; position: relative; }
-        li::before { content: "├── "; color: #007bff; font-weight: bold; }
+        li { margin: 6px 0; position: relative; font-family: monospace; font-size: 14px; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="card">
         <h1>TreeCost - Sistema de Fórmulas (BOM)</h1>
-        <div class="subtitle">Projeto Acadêmico - Estrutura de Árvore Genérica</div>
-
-        <div class="card">
-            <h3>Resumo do Produto (Caneta)</h3>
-            <p><strong>Custo Total (Implosão):</strong> R$ 2,50</p>
+        <p>Projeto Académico - Estrutura de Árvore Genérica</p>
+        
+        <div class="highlight">
+            <h3>Resumo do Produto (Computador)</h3>
+            <p>Custo Total Acumulado (Implosão): <strong>R$ 8080,00</strong></p>
         </div>
 
         <h3>Explosão de Componentes</h3>
         <ul>
-            <li><strong>Caneta</strong> (Qtd: 1 | Preço: R$ 2,50)
+            <li>📁 Computador | Qtd: 1 | R$ 2500,00
                 <ul>
-                    <li><strong>Tinta</strong> (Qtd: 1 | Preço: R$ 0,80)
+                    <li>└── Gabinete | Qtd: 1 | R$ 800,00
                         <ul>
-                            <li><strong>Pigmento</strong> (Qtd: 1 | Preço: R$ 0,30)</li>
-                            <li><strong>Solvente</strong> (Qtd: 1 | Preço: R$ 0,50)</li>
+                            <li>└── Armazenamento | Qtd: 1 | R$ 0,00
+                               <ul>
+                                   <li>└── SSD | Qtd: 1 | R$ 400,00</li>
+                                   <li>└── HDD | Qtd: 1 | R$ 250,00</li>
+                               </ul>
+                            </li>
+                            <li>└── Fonte de Alimentação | Qtd: 1 | R$ 300,00</li>
+                            <li>└── Placa-Mãe | Qtd: 1 | R$ 500,00
+                               <ul>
+                                   <li>└── Chipset | Qtd: 1 | R$ 150,00</li>
+                                   <li>└── CPU | Qtd: 1 | R$ 1000,00</li>
+                                   <li>└── Memória RAM | Qtd: 2 | R$ 200,00</li>
+                               </ul>
+                            </li>
                         </ul>
                     </li>
-                    <li><strong>Corpo</strong> (Qtd: 1 | Preço: R$ 1,00)
+                    <li>└── Monitor | Qtd: 1 | R$ 900,00
                         <ul>
-                            <li><strong>Plástico</strong> (Qtd: 1 | Preço: R$ 0,70)</li>
-                            <li><strong>Clip</strong> (Qtd: 1 | Preço: R$ 0,30)</li>
+                            <li>└── Carcaça | Qtd: 1 | R$ 100,00</li>
+                            <li>└── Tela LCD | Qtd: 1 | R$ 600,00</li>
                         </ul>
                     </li>
-                    <li><strong>Tampa</strong> (Qtd: 1 | Preço: R$ 0,70)
+                    <li>└── Periféricos | Qtd: 1 | R$ 0,00
                         <ul>
-                            <li><strong>Plástico</strong> (Qtd: 1 | Preço: R$ 0,50)</li>
-                            <li><strong>Vedação</strong> (Qtd: 1 | Preço: R$ 0,20)</li>
+                            <li>└── Mouse | Qtd: 1 | R$ 80,00</li>
+                            <li>└── Teclado | Qtd: 1 | R$ 100,00</li>
                         </ul>
                     </li>
                 </ul>
             </li>
         </ul>
+        <p style="margin-top: 20px; font-size: 12px; color: #666;"><em>Relatório estático sincronizado com o modelo de dados do projeto.</em></p>
     </div>
 </body>
 </html>
